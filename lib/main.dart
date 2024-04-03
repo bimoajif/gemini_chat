@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gemini_chat/providers.dart';
 
+import 'services/service.dart';
 import 'views/views.dart';
 
 void main() {
@@ -16,7 +17,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return App();
+    return BlocProvider<GeminiBloc>(
+      create: (_) => GeminiBloc(),
+      child: const App(),
+    );
     // return MultiBlocProvider(
     //   providers: providers,
     //   child: const App(),
@@ -30,6 +34,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoApp(
+      debugShowCheckedModeBanner: false,
       home: SplashView(),
     );
   }

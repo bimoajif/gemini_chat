@@ -7,6 +7,14 @@ final class GeminiInitial extends GeminiState {}
 
 final class GeminiLoading extends GeminiState {}
 
-final class GeminiSuccess extends GeminiState {}
+final class GeminiSuccess extends GeminiState {
+  final ChatSession chats;
 
-final class GeminiError extends GeminiState {}
+  GeminiSuccess({required this.chats});
+}
+
+final class GeminiError extends GeminiState {
+  final String message;
+
+  GeminiError({required this.message});
+}

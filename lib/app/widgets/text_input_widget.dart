@@ -19,7 +19,7 @@ class _TextInputFieldState extends State<TextInputField> {
   }
 
   Widget get buildTextField => Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(12.0),
         child: CupertinoTextField(
           onChanged: (val) {
             if (val != "") {
@@ -40,21 +40,22 @@ class _TextInputFieldState extends State<TextInputField> {
             vertical: 10.0,
             horizontal: 12.0,
           ),
-          suffix: IconButton.filled(
-            onPressed: () {},
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.resolveWith((states) {
-                // If the button is pressed, return green, otherwise blue
-                if (states.contains(MaterialState.pressed)) {
-                  return Color(0xFF329369);
-                }
-                return buttonColor;
-              }),
-            ),
-            color: const Color(0xFF6CD86B),
-            icon: const Icon(
-              CupertinoIcons.arrow_up,
-              color: Colors.white,
+          suffix: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 3),
+            child: SizedBox(
+              height: 32,
+              width: 32,
+              child: CupertinoButton(
+                padding: EdgeInsets.zero,
+                color: buttonColor,
+                borderRadius: BorderRadius.circular(16),
+                onPressed: () {},
+                child: const Icon(
+                  CupertinoIcons.arrow_up,
+                  color: Colors.white,
+                  weight: 5,
+                ),
+              ),
             ),
           ),
           expands: true,
@@ -63,7 +64,7 @@ class _TextInputFieldState extends State<TextInputField> {
           placeholder: "Tulis pesan anda",
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(20),
               border: Border.all(color: const Color(0xFF62666A))),
         ),
       );

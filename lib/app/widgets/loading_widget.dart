@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -15,11 +14,11 @@ Widget get buildLoading => Container(
         ).animate(onPlay: (controller) {
           controller.repeat();
         }).rotate(
-          duration: Durations.extralong4,
-          delay: Durations.long4,
+          duration: const Duration(milliseconds: 1000),
+          delay: const Duration(milliseconds: 600),
           curve: Curves.easeInOut,
         ),
         // child:
         //     CircularProgressIndicator.adaptive(backgroundColor: Colors.white),
       ),
-    ).animate(delay: Durations.medium1);
+    ).animate(delay: const Duration(milliseconds: 250));

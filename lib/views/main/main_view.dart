@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gemini_chat/services/service.dart';
 
 import '../../app/app.dart';
 
@@ -36,15 +38,56 @@ class _MainViewState extends State<MainView> {
             constraints: const BoxConstraints.expand(),
             child: Column(
               // alignment: Alignment.bottomCenter,
-              children: [
-                Expanded(
-                    child: Placeholder(
-                  color: Colors.black12,
-                )),
-                TextInputField()
-              ],
+              children: [Expanded(child: Body()), TextInputField()],
             ),
           ),
         ),
       );
+}
+
+class Body extends StatefulWidget {
+  const Body({super.key});
+
+  @override
+  State<Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  late String resp;
+
+  @override
+  Widget build(BuildContext context) {
+    return Placeholder(
+      color: Colors.black12,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CupertinoButton.filled(
+              child: const Text('press me'),
+              onPressed: () {
+                context
+                    .read<GeminiBloc>()
+                    .add(InitGemini(prompt: "hello how are you"));
+              },
+            ),
+            BlocBuilder<GeminiBloc, GeminiState>(
+              builder: (context, state) {
+                print(state);
+                if (state is GeminiLoading) {
+                  print('here');
+                  return buildLoading;
+                } else if (state is GeminiSuccess) {
+                  resp = state.chats.toString();
+                  return Text(resp);
+                } else {
+                  return Text('aaa');
+                }
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }

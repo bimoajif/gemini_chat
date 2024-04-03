@@ -18,10 +18,13 @@ Future<void> gemini() async {
       model: 'gemini-pro',
       apiKey: apiKey,
       generationConfig: GenerationConfig(maxOutputTokens: 100));
+
+  // init chat
   final chat = model.startChat(history: [
     Content.text('Hello, I my name is bimo.'),
     Content.model([TextPart('Great to meet you. What would you like to know?')])
   ]);
+
   var message = 'How many paws are in my house?';
   print('Message: $message');
   var content = Content.text(message);

@@ -4,21 +4,35 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../app/app.dart';
-import '../main/main_view.dart';
+import '../views.dart';
 
-class SplashView extends StatelessWidget {
+class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 5)).then((_) {
+  State<SplashView> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 5)).then((_) {
       Navigator.of(context).pushReplacement(
         CupertinoPageRoute<void>(
-            builder: (BuildContext context) => const MainView(),
+            builder: (BuildContext context) => const AuthView(),
             fullscreenDialog: true),
       );
     });
+    super.initState();
+  }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       backgroundColor: Colors.black,
       child: Stack(
@@ -82,8 +96,10 @@ class SplashView extends StatelessWidget {
             ],
           )
               .animate()
-              .scale(curve: Curves.easeOut, duration: Durations.extralong4)
-              .fade(duration: Durations.extralong4),
+              .scale(
+                  curve: Curves.easeOut,
+                  duration: const Duration(milliseconds: 1000))
+              .fade(duration: const Duration(milliseconds: 1000)),
         ],
       );
 }
