@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:gemini_chat/views/main/main_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AuthView extends StatefulWidget {
   const AuthView({super.key});
@@ -17,6 +17,63 @@ class _AuthViewState extends State<AuthView> {
   TextEditingController controller = TextEditingController();
 
   Widget btnChild = Text('continue →', style: GoogleFonts.spaceGrotesk());
+
+  void handleInfo() {
+    showCupertinoModalBottomSheet(
+        expand: false,
+        // useRootNavigator: true,
+        context: context,
+        builder: (context) {
+          return Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'How to Get API Key',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    CupertinoButton(
+                      color: CupertinoColors.systemGrey,
+                      borderRadius: BorderRadius.circular(100),
+                      padding: EdgeInsets.zero,
+                      disabledColor: CupertinoColors.inactiveGray,
+                      // onPressed: null,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Icon(CupertinoIcons.clear_thick),
+                    ),
+                  ],
+                ),
+                const Divider(color: CupertinoColors.systemGrey),
+                const Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(text: '1. Go to ', children: [
+                        TextSpan(
+                            text: 'https://aistudio.google.com/app/apikey',
+                            style: TextStyle(color: CupertinoColors.link)),
+                        TextSpan(text: '\n')
+                      ]),
+                      TextSpan(text: '2. Log in to your Gemini Account\n'),
+                      TextSpan(text: '3. Select ', children: [
+                        TextSpan(
+                            text: 'Create API key ',
+                            style: TextStyle(color: CupertinoColors.link)),
+                        TextSpan(text: 'button\n')
+                      ])
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +112,7 @@ class _AuthViewState extends State<AuthView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CupertinoButton(
-            onPressed: () {},
+            onPressed: handleInfo,
             padding: EdgeInsets.zero,
             child: const Icon(
               CupertinoIcons.info_circle_fill,
@@ -85,20 +142,24 @@ class _AuthViewState extends State<AuthView> {
                   //   delay: const Duration(milliseconds: 200),
                   //   curve: Curves.easeInOut,
                   // );
-                  btnChild = CircularProgressIndicator.adaptive(
-                    backgroundColor: Colors.white,
+                  btnChild = const CupertinoActivityIndicator(
+                    color: Colors.white,
                   );
                 });
-                await Future.delayed(Duration(seconds: 5));
+                await Future.delayed(const Duration(seconds: 5));
+                if (mounted) {
+                  Navigator.of(context).pushReplacement(
+                    CupertinoPageRoute<void>(
+                        builder: (BuildContext context) => const MainView(),
+                        fullscreenDialog: true),
+                  );
+                }
                 setState(() {
                   btnChild =
                       Text('continue →', style: GoogleFonts.spaceGrotesk());
                 });
               },
               child: btnChild,
-              // child: CircularProgressIndicator.adaptive(
-              //   backgroundColor: Colors.white,
-              // ),
             ),
           )
         ],

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gemini_chat/providers.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'services/service.dart';
 import 'views/views.dart';
@@ -33,9 +32,19 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
+    return CupertinoApp(
       debugShowCheckedModeBanner: false,
-      home: SplashView(),
+      // home: SplashView(),
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+          case '/':
+            return MaterialWithModalsPageRoute(
+                builder: (_) => const SplashView(), settings: settings);
+          default:
+            return MaterialWithModalsPageRoute(
+                builder: (_) => const SplashView(), settings: settings);
+        }
+      },
     );
   }
 }
