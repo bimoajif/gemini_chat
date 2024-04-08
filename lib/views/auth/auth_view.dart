@@ -125,7 +125,7 @@ class _AuthViewState extends State<AuthView> {
             width: MediaQuery.of(context).size.width / 2.5,
             height: 50,
             child: CupertinoButton(
-              color: const Color(0xFFFF6B57),
+              color: const Color(0xFFFE5104),
               borderRadius: BorderRadius.circular(100),
               padding: EdgeInsets.zero,
               disabledColor: CupertinoColors.inactiveGray,

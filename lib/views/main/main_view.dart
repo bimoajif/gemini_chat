@@ -63,7 +63,8 @@ class _BodyState extends State<Body> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CupertinoButton.filled(
+            CupertinoButton(
+              color: Color(0xFFFE5104),
               child: const Text('press me'),
               onPressed: () {
                 context

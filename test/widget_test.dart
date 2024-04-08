@@ -5,14 +5,9 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gemini_chat/services/service.dart';
-
-import 'dart:io';
-
-import 'package:google_generative_ai/google_generative_ai.dart';
 
 void main() {
   BlocProvider<GeminiBloc>(
